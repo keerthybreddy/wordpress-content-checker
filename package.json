@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/keerthybreddy/wordpress-content-checker/issues"
   },
-  "homepage": "https://github.com/keerthybreddy/wordpress-content-checker#readme"
+  "homepage": "https://github.com/keerthybreddy/wordpress-content-checker#readme",
+  "dependencies": {
+    "axios": "^1.10.0"
+  }
 }
