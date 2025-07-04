@@ -21,16 +21,12 @@ jobs:
 
       - name: Fetch WordPress posts
         run: node fetch-posts.js
-      
-      - name: Debug: Show generated HTML (safe)
-        shell: bash {0}
-        run: |
-          set +e  # disable exit on error for this step
-          if [ -f content/post-1.html ]; then
-            cat content/post-1.html
-          else
-            echo "No post HTML found"
-          fi
 
       - name: Run metadata checks
         run: bash check-metadata.sh
+
+      - name: Upload fetched HTML
+        uses: actions/upload-artifact@v3
+        with:
+          name: wordpress-html
+          path: content/*.html
