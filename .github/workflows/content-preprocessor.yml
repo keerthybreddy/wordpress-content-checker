@@ -22,8 +22,5 @@ jobs:
       - name: Fetch WordPress posts
         run: node fetch-posts.js
 
-      - name: Debug: Show generated HTML
-        run: cat content/post-1.html
-
       - name: Run metadata checks
         run: bash check-metadata.sh
