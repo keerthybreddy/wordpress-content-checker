@@ -22,8 +22,10 @@ jobs:
       - name: Fetch WordPress posts
         run: node fetch-posts.js
       
-      - name: Debug: Show generated HTML (if exists)
+      - name: Debug: Show generated HTML (safe)
+        shell: bash {0}
         run: |
+          set +e  # disable exit on error for this step
           if [ -f content/post-1.html ]; then
             cat content/post-1.html
           else
