@@ -4,7 +4,7 @@ const path = require('path');
 
 async function fetchPosts() {
   try {
-    const res = await axios.get('https://testcontentpreprocessor.wordpress.com/wp-json/wp/v2/posts?per_page=5');
+    const res = await axios.get('https://public-api.wordpress.com/wp/v2/sites/testcontentpreprocessor.wordpress.com/posts?per_page=5');
     const posts = res.data;
 
     // Ensure the content directory exists
