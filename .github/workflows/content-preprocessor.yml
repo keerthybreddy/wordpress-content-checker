@@ -21,6 +21,14 @@ jobs:
 
       - name: Fetch WordPress posts
         run: node fetch-posts.js
+      
+      - name: Debug: Show generated HTML (if exists)
+        run: |
+          if [ -f content/post-1.html ]; then
+            cat content/post-1.html
+          else
+            echo "No post HTML found"
+          fi
 
       - name: Run metadata checks
         run: bash check-metadata.sh
