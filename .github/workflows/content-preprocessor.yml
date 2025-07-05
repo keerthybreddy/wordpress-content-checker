@@ -30,7 +30,7 @@ jobs:
 
       # STEP 4: Run fetch-posts.js script to fetch the 5 most recent posts published on the Wordpress site
       - name: Fetch WordPress posts
-        run: node fetch-posts.js2
+        run: node fetch-posts.js
 
       # STEP 5: Run check-metadata.sh bash script to validate if the posts fetched in Step 4 satisfy the given template
       - name: Run metadata checks
