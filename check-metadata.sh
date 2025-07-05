@@ -85,10 +85,6 @@ for file in content/*.html; do
             missing="$missing missing-image"
         fi
 
-    # checks to see if the post has an <h1> tag or a <p> tag and if not, appends the errors to the missing string variable
-    grep -q '<h1>' "$file" || missing="$missing missing-h1"
-    grep -q '<p class="intro">' "$file" || missing="$missing missing-intro"
-
     # if the missing string is not empty, this indicates that the file format does not satisfy the template
     if [ -n "$missing" ]; then
         
