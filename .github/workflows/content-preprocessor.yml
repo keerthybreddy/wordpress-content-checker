@@ -1,30 +1,49 @@
+# GitHub action workflow name
 name: WordPress Content Preprocessor
 
+# have to manually trigger workflow in GitHub
 on:
   workflow_dispatch:
 
 jobs:
+  # there is one job for this automation called content-check
   content-check:
+    # default OS for Node/JS project
     runs-on: ubuntu-latest
 
+    # defines steps of the content-check job
     steps:
+
+      # STEP 1: Create a runner (temporary virtual machine) and upload all files from repo onto the runner
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # STEP 2: Set up Node.js v18 environment on runner to run JS code on
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
+      # STEP 3: Install all dependencies defined in package.json to run all scripts properly
       - name: Install dependencies
         run: npm install
 
+      # STEP 4: Run fetch-posts.js script to fetch the 5 most recent posts published on the Wordpress site
       - name: Fetch WordPress posts
-        run: node fetch-posts.js
+        run: node fetch-posts.js2
 
+      # STEP 5: Run check-metadata.sh bash script to validate if the posts fetched in Step 4 satisfy the given template
       - name: Run metadata checks
         run: bash check-metadata.sh
+      
+      # STEP 6: Uses the Upload Artifact GitHub action to upload any files generated from the workflow thus far (template validation report) to GitHub to be able to download and view
+      - name: Upload validation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-report
+          path: check-report.md
 
+      # STEP 7: Uses the Upload Artifact GitHub action to upload any files generated from the workflow thus far (HTML files of wordpress posts fetched) to GitHub to be able to download and view
       - name: Upload fetched HTML
         uses: actions/upload-artifact@v4
         with:
