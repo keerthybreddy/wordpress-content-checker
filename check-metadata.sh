@@ -42,8 +42,10 @@ for file in content/*.html; do
         # uses Regex to store the value in the content of the meta tag for the description in a variable called description
         description=$(grep -oP 'meta name="description" content="\K[^"]*' "$file" | xargs)
         
-        # checks whether the content of the description variable is an empty string and if so, appends "empty-description" to the missing string variable
-        [ -z "$description" ] && missing="$missing empty-description"
+        # checks whether the content of the description variable is an empty string or has placeholder text and if so, appends "empty-description" to the missing string variable
+        if [ -z "$description" ] || [ "$description" = "No description available" ]; then
+            missing="$missing invalid-title"
+        fi
     else
 
         # if the description meta tag dosen't exist at all, appends "missing-description" to the missing string variable
