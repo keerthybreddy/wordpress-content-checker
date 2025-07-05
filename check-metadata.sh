@@ -44,7 +44,7 @@ for file in content/*.html; do
         
         # checks whether the content of the description variable is an empty string or has placeholder text and if so, appends "empty-description" to the missing string variable
         if [ -z "$description" ] || [ "$description" = "No description available" ]; then
-            missing="$missing invalid-title"
+            missing="$missing invalid-description"
         fi
     else
 
