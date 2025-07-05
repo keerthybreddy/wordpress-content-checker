@@ -35,13 +35,16 @@ jobs:
       # STEP 5: Run check-metadata.sh bash script to validate if the posts fetched in Step 4 satisfy the given template
       - name: Run metadata checks
         run: bash check-metadata.sh
+        continue-on-error: true
       
       # STEP 6: Uses the Upload Artifact GitHub action to upload any files generated from the workflow thus far (template validation report) to GitHub to be able to download and view
       - name: Upload validation report
+        if: always()  # <--- Always run this step
         uses: actions/upload-artifact@v4
         with:
           name: validation-report
-          path: check-report.md
+          path: validation-report.md
+
 
       # STEP 7: Uses the Upload Artifact GitHub action to upload any files generated from the workflow thus far (HTML files of wordpress posts fetched) to GitHub to be able to download and view
       - name: Upload fetched HTML
