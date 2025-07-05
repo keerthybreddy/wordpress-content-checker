@@ -106,13 +106,12 @@ for file in content/*.html; do
     fi
 
     echo "" >> "$report"
+done
 
-    # if the failures variable is not equal to 0, this indicates that at least one of the files within the content folder have failed
+# if the failures variable is not equal to 0, this indicates that at least one of the files within the content folder have failed
     if [ $failures -ne 0 ]; then
         echo "Some files failed validation. See validation-report.md for details."
         exit 1
     else
         echo "All files passed validation."
     fi
-
-done
